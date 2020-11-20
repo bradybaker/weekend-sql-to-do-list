@@ -11,11 +11,30 @@
 </head>
 
 <body>
+    <header>
+        <h1>Brady Baker's TEE OH DEE OH</h1>
+    </header>
     <main>
         <section>
-            <h1>
-                Brady Baker's TEE OH DEE OH
-            </h1>
+            <h3>Your To Do List</h3>
+            <label>Task:</label><input type="text" placeholder="What needs to be done?">
+            <label>Complete By:</label><input type="text" placeholder="When does this need to by done by?">
+        </section>
+        <section>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Due By</th>
+                        <th>Task</th>
+                        <th>Completed</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody id="theList">
+                    <!-- JQ ALL UP IN HERE -->
+                </tbody>
+            </table>
         </section>
     </main>
 </body>
