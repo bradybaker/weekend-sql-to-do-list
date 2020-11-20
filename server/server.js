@@ -4,11 +4,11 @@ const express = require('express');
 
 // Will need for POST requests
 const bodyParser = require('body-parser');
-
+const toDoRouter = require('./routes/todo.router');
 // this creates an instance of the express web server 
 const app = express();
 
-
+app.use('/todo', toDoRouter);
 
 // Setup bodyParser - parses the body of the request 
 // jquery $.ajex uses urlencoded
