@@ -11,7 +11,7 @@ toDoRouter.get('/', (req, res) => {
             res.send(result.rows);
         })
         .catch(error => {
-            console.log('error getting todo list', error);
+            console.log('error in router GET todo list', error);
             res.sendStatus(500);
         });
 });
