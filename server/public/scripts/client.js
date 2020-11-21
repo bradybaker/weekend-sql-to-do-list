@@ -74,24 +74,22 @@ function getList() { //Getting TODO list from the server
 function renderList(todo) {
     $('#theList').empty();
     for (let item of todo) {
-        item.date_to_complete_by = (new Date()).toLocaleString("en-US", {
-            month: 'short',
-            day: '2-digit',
-            year: 'numeric'
-        })
+        console.log('Item Completed', item.completed)
         $('#theList').append(`
         <tr id="${item.id}" data-id="${item.id}">
         <td>${item.date_to_complete_by}</td>
         <td>${item.task}</td>
-        <td>${item.completed}</td>
-        <td><button class="completeButton">Complete Task</button></td>
-        <td><button class="deleteButton">Delete Task</button></td>
+        <td>${item.completed === null ? 'No' : 'Yes'}</td>
+        <td><button class="completeButton btn btn-light">Complete Task</button></td>
+        <td><button class="deleteButton btn btn-light">Delete Task</button></td>
         </tr>
         `)
-        if (item.completed === 'Yes') {
+
+
+        if (item.completed) {
             $(`#${item.id}`).addClass('green')
         } else {
-            $(`#${item.id}`).removeClass('green')
+            $(`#${item.id}`)
         }
     }
 }

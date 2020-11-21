@@ -1,7 +1,34 @@
 body {
-    background-color: aliceblue;
+    /* width: 1205px; */
+    height: 1005px;
+    background-image: url("../images/mohammad-alizade-fKjJYw1vOf8-unsplash.jpg");
+    background-size: cover; /* or contain depending on what you want */
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+h1 {
+    text-align: center;
+}
+
+main {
+    width: 80%;
+    margin: auto
+}
+
+button {
+    background-color: #FFFDF6;
+}
+
+thead {
+    text-align: center;
+    background-color: #FFFDF6;
+}
+
+td {
+    text-align: center;
 }
 
 .green {
-    background-color: greenyellow;
+    background-color: #91B383;
 }

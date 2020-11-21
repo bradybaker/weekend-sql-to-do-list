@@ -5,7 +5,7 @@ const pool = require('../modules/pool');
 
 // Get the TODO list
 toDoRouter.get('/', (req, res) => { // getting table info form the database 
-    let sqlText = 'SELECT * FROM "todo" ORDER BY "date_to_complete_by";';
+    let sqlText = 'SELECT * FROM "todo" ORDER BY "completed";';
     pool.query(sqlText)
         .then(result => {
             res.send(result.rows);
@@ -34,8 +34,9 @@ toDoRouter.post('/', (req, res) => { // sending new tasks to the database
 toDoRouter.put('/:id', (req, res) => { // Updating table info the database and DOM
     let taskToDo = req.body;
     let id = req.params.id;
-    let sqlText = `UPDATE todo SET completed='Yes' WHERE id=$1;`;
-    pool.query(sqlText, [id])
+    let date = new Date()
+    let sqlText = `UPDATE todo SET completed=$1 WHERE id=$2;`;
+    pool.query(sqlText, [date, id])
         .then((result) => {
             res.sendStatus(200);
         }).catch((error) => {
