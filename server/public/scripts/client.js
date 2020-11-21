@@ -3,8 +3,30 @@ console.log('Hello from JS')
 $(document).ready(readyNow);
 
 function readyNow() {
-    console.log('Hello from JQ')
+    $('#submitButton').on('click', handleInputs)
     getList()
+}
+
+function handleInputs() { // Handle input values from the DOM 
+    let newTask = {
+        task: $("#taskInput").val(),
+        date_to_complete_by: $('#dueInput').val()
+    }
+    console.log(newTask)
+    postList(newTask)
+}
+
+function postList(newTask) { // Send input values to the server 
+    console.log('In postList,', newTask);
+    $.ajax({
+        method: 'POST',
+        url: '/todo',
+        data: newTask
+    }).then(function (response) {
+        getList();
+    }).catch(function (error) {
+        console.log('Error in client POST', error);
+    })
 }
 
 function getList() { //Getting TODO list from the server

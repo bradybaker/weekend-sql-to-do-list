@@ -8,13 +8,13 @@ const toDoRouter = require('./routes/todo.router');
 // this creates an instance of the express web server 
 const app = express();
 
-app.use('/todo', toDoRouter);
 
 // Setup bodyParser - parses the body of the request 
 // jquery $.ajex uses urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 // axios will see with react in week 11, uses this below 
 app.use(bodyParser.json());
+app.use('/todo', toDoRouter);
 
 // Set up static files service
 app.use(express.static('server/public'));
