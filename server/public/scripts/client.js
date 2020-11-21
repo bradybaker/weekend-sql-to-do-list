@@ -5,6 +5,7 @@ $(document).ready(readyNow);
 function readyNow() {
     $('#submitButton').on('click', handleInputs)
     $('#theList').on('click', '.completeButton', completeTask)
+    $('#theList').on('click', '.deleteButton', deleteTask)
     getList()
 }
 
@@ -15,6 +16,19 @@ function handleInputs() { // Handle input values from the DOM
     }
     console.log(newTask)
     postList(newTask)
+}
+
+function deleteTask() {
+    let task = $(this).closest('tr').data('id');
+    $.ajax({
+        method: 'DELETE',
+        url: `/todo/${task}`
+    }).then((function (resposne) {
+        getList();
+    })).catch(function (error) {
+        console.log('Error in client deleting task:', error);
+        alert('Something bad happened. Try again later');
+    })
 }
 
 function completeTask() { // Marking a task as complete
