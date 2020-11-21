@@ -4,6 +4,7 @@ $(document).ready(readyNow);
 
 function readyNow() {
     $('#submitButton').on('click', handleInputs)
+    $('#theList').on('click', '.completeButton', completeTask)
     getList()
 }
 
@@ -14,6 +15,21 @@ function handleInputs() { // Handle input values from the DOM
     }
     console.log(newTask)
     postList(newTask)
+}
+
+function completeTask() { // Marking a task as complete
+    let task = $(this).closest('tr').data('id');
+    console.log(task);
+    $.ajax({
+        method: 'PUT',
+        url: `/todo/${task}`,
+        data: task
+    }).then(function (response) {
+        getList();
+    }).catch(function (error) {
+        console.log('Error in client PUT', error);
+        alert('Something bad happened. Try again later');
+    })
 }
 
 function postList(newTask) { // Send input values to the server 
@@ -50,12 +66,12 @@ function renderList(todo) {
             year: 'numeric'
         })
         $('#theList').append(`
-        <tr>
+        <tr data-id="${item.id}">
         <td>${item.date_to_complete_by}</td>
         <td>${item.task}</td>
         <td>${item.completed}</td>
-        <td><button id"completeButton">Complete Task</button></td>
-        <td><button id"deleteButton">Delete Task</button></td>
+        <td><button class="completeButton">Complete Task</button></td>
+        <td><button class="deleteButton">Delete Task</button></td>
         </tr>
         `)
     }
