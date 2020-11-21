@@ -1,5 +1,6 @@
 console.log('Hello from JS')
 
+
 $(document).ready(readyNow);
 
 function readyNow() {
@@ -74,12 +75,15 @@ function getList() { //Getting TODO list from the server
 function renderList(todo) {
     $('#theList').empty();
     for (let item of todo) {
-        console.log('Item Completed', item.completed)
+        let dueDate = new Date(item.date_to_complete_by)
+        let completedDate = new Date(item.completed)
+        let dueDateString = `${dueDate.getMonth() + 1}/${dueDate.getDate()}/${dueDate.getFullYear()}`
+        let completedDateString = `${completedDate.getMonth() + 1}/${completedDate.getDate()}/${completedDate.getFullYear()}`
         $('#theList').append(`
         <tr id="${item.id}" data-id="${item.id}">
-        <td>${item.date_to_complete_by}</td>
+        <td>${dueDateString}</td>
         <td>${item.task}</td>
-        <td>${item.completed === null ? 'No' : 'Yes'}</td>
+        <td>${item.completed === null ? 'Not Completed' : completedDateString}</td>
         <td><button class="completeButton btn btn-light">Complete Task</button></td>
         <td><button class="deleteButton btn btn-light">Delete Task</button></td>
         </tr>
