@@ -4,7 +4,7 @@ const toDoRouter = express.Router();
 const pool = require('../modules/pool');
 
 // Get the TODO list
-toDoRouter.get('/', (req, res) => {
+toDoRouter.get('/', (req, res) => { // getting table info form the database 
     let sqlText = 'SELECT * FROM "todo" ORDER BY "date_to_complete_by";';
     pool.query(sqlText)
         .then(result => {
@@ -16,7 +16,7 @@ toDoRouter.get('/', (req, res) => {
         });
 });
 
-toDoRouter.post('/', (req, res) => {
+toDoRouter.post('/', (req, res) => { // sending new tasks to the database
     let newToDo = req.body
     console.log(newToDo)
     let sqlText = `INSERT INTO "todo" ("task", "date_to_complete_by") 
@@ -26,12 +26,12 @@ toDoRouter.post('/', (req, res) => {
             res.sendStatus(201);
         })
         .catch((error) => {
-            console.log('Error in posting Koalas', error);
+            console.log('Error in server POST', error);
             res.sendStatus(500);
         })
 })
 
-toDoRouter.put('/:id', (req, res) => {
+toDoRouter.put('/:id', (req, res) => { // Updating table info the database and DOM
     let taskToDo = req.body;
     let id = req.params.id;
     let sqlText = `UPDATE todo SET completed='Yes' WHERE id=$1;`;
@@ -39,22 +39,21 @@ toDoRouter.put('/:id', (req, res) => {
         .then((result) => {
             res.sendStatus(200);
         }).catch((error) => {
-            console.log('Error when changing transfer status', error)
+            console.log('Error in server PUT', error)
             res.sendStatus(500);
         })
-    console.log(`Updating koala ${id} with`, taskToDo);
+    console.log(`Updating task ${id} with`, taskToDo);
 })
 
-toDoRouter.delete('/:id', (req, res) => {
+toDoRouter.delete('/:id', (req, res) => { // Deleting info from the database and DOM
     let id = req.params.id;
     let sqlText = `DELETE FROM todo WHERE id=$1;`;
     pool.query(sqlText, [id])
         .then((result) => {
             console.log('Got back', result.rows);
-            //delete sends back an ok status, client will then ask for all the data with a GET
             res.sendStatus(200);
         }).catch((error) => {
-            console.log('Error from db', error);
+            console.log('Error in server DELETE', error);
             res.sendStatus(500);
         })
 })

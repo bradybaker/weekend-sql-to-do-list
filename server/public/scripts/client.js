@@ -80,7 +80,7 @@ function renderList(todo) {
             year: 'numeric'
         })
         $('#theList').append(`
-        <tr data-id="${item.id}">
+        <tr id="${item.id}" data-id="${item.id}">
         <td>${item.date_to_complete_by}</td>
         <td>${item.task}</td>
         <td>${item.completed}</td>
@@ -88,5 +88,10 @@ function renderList(todo) {
         <td><button class="deleteButton">Delete Task</button></td>
         </tr>
         `)
+        if (item.completed === 'Yes') {
+            $(`#${item.id}`).addClass('green')
+        } else {
+            $(`#${item.id}`).removeClass('green')
+        }
     }
 }
