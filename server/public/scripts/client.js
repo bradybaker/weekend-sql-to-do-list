@@ -19,6 +19,7 @@ function handleInputs() { // Handle input values from the DOM
     }
     console.log(newTask)
     postList(newTask)
+    clearInputs()
 }
 
 function deleteTask() { // Selecting which task to delete, sending to server
@@ -122,4 +123,8 @@ function renderList(todo) { // Rendering tasks to the DOM/Formatting dates so th
             $(`#${item.id}`)
         }
     }
+}
+
+function clearInputs() {
+    $('input').val('')
 }
