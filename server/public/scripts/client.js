@@ -21,16 +21,41 @@ function handleInputs() { // Handle input values from the DOM
     postList(newTask)
 }
 
-function deleteTask() {
-    let task = $(this).closest('tr').data('id');
-    $.ajax({
-        method: 'DELETE',
-        url: `/todo/${task}`
-    }).then((function (resposne) {
-        getList();
-    })).catch(function (error) {
-        console.log('Error in client deleting task:', error);
-        alert('Something bad happened. Try again later');
+function deleteTask() { // Selecting which task to delete, sending to server
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'Your task will be gone forever!',
+        icon: 'warning',
+        heightAuto: false,
+        showCancelButton: true,
+        confirmButtonText: 'Yes!',
+        cancelButtonText: 'No, keep it'
+    }).then((result) => {
+        if (result.value) {
+            Swal.fire(
+                'Deleted!',
+                'Your imaginary file has been deleted.',
+                'success',
+                false
+            )
+            let task = $(this).closest('tr').data('id');
+            $.ajax({
+                method: 'DELETE',
+                url: `/todo/${task}`
+            }).then((function (resposne) {
+                getList();
+            })).catch(function (error) {
+                console.log('Error in client deleting task:', error);
+                alert('Something bad happened. Try again later');
+            })
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            Swal.fire(
+                'Cancelled',
+                'Task not deleted!',
+                'error',
+                false
+            )
+        }
     })
 }
 
@@ -74,7 +99,7 @@ function getList() { //Getting TODO list from the server
     });
 }
 
-function renderList(todo) {
+function renderList(todo) { // Rendering tasks to the DOM/Formatting dates so they aren't ugly
     $('#theList').empty();
     for (let item of todo) {
         let dueDate = new Date(item.date_to_complete_by)
@@ -90,7 +115,6 @@ function renderList(todo) {
         <td><button class="deleteButton btn btn-light">Delete Task</button></td>
         </tr>
         `)
-
 
         if (item.completed) {
             $(`#${item.id}`).addClass('green')
