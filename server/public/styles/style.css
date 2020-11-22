@@ -1,5 +1,5 @@
 body {
-    height: 65em;
+    height: 60em;
     width: auto;
     background-image: url("../images/mohammad-alizade-fKjJYw1vOf8-unsplash.jpg");
     background-size: cover;
@@ -7,12 +7,19 @@ body {
     background-repeat: no-repeat;
 }
 
-body.swal2-height-auto {
-    height: 0px;
+header {
+    margin-top: 4em;
+    margin-bottom: 2em;
+
 }
 
 h1 {
     text-align: center;
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 5em;
+    letter-spacing: -2px;
+    border-bottom: 2px solid black;
+    text-transform: uppercase;
 }
 
 main {
@@ -20,8 +27,27 @@ main {
     margin: auto
 }
 
-button {
-    background-color: #FFFDF6;
+h3 {
+    font-size: 30px;
+    margin-bottom: .25em;
+    font-family: "Trebuchet MS", sans-serif;
+    font-weight: bolder;
+}
+
+label {
+    font-size: 20px;
+    font-family: "Trebuchet MS", sans-serif;
+    font-weight: bold;
+}
+
+input {
+    margin-bottom: .75em;
+    margin-top: .25em;
+}
+
+#submitButton {
+    margin-top: .5em;
+    margin-bottom: 1em;
 }
 
 thead {
@@ -31,6 +57,14 @@ thead {
 
 td {
     text-align: center;
+}
+
+.completeButton {
+    background-color: #85DE77;
+}
+
+.deleteButton {
+    background-color: #FF756D;
 }
 
 .green {
