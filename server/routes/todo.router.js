@@ -5,7 +5,7 @@ const pool = require('../modules/pool');
 
 // Get the TODO list
 toDoRouter.get('/', (req, res) => { // getting table info form the database 
-    let sqlText = 'SELECT * FROM "todo" ORDER BY "completed";';
+    let sqlText = 'SELECT * FROM "todo" ORDER BY "completed" DESC;';
     pool.query(sqlText)
         .then(result => {
             res.send(result.rows);
